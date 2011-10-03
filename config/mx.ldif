@@ -2,24 +2,24 @@ dn: uid=avena, ou=people, dc=mocambos, dc=net
 objectClass: inetOrgPerson
 objectClass: posixAccount
 objectClass: shadowAccount
-uid: avena
+uid: mx
 sn: Blender
-givenName: Avena
-cn: Avena Blender
-displayName: TB
+givenName: Mx
+cn: Mx Blender
+displayName: MX
 uidNumber: 1008
 gidNumber: 10000
 userPassword: livre
-gecos: Avena Blender
+gecos: Mx Blender
 loginShell: /bin/bash
-homeDirectory: /home/avena
+homeDirectory: /home/mx
 shadowExpire: -1
 shadowFlag: 0
 shadowWarning: 7
 shadowMin: 8
 shadowMax: 999999
 shadowLastChange: 10877
-mail: avena@mocambos.net
+mail: mxxx@mocambos.net
 postalCode: 31000
 l: Campinas
 o: Mocambos
