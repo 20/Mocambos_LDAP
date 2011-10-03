@@ -1,0 +1,111 @@
+# General config
+#dn: cn=config
+#objectClass: olcGlobal
+#cn: config
+#add: olcServerID
+#olcServerID: 1
+
+#dn: olcDatabase={0}config,cn=config
+#objectClass: olcDatabaseConfig
+#olcDatabase: {0}config
+#olcRootPW: {SSHA}lx56Oal2lADo7y21hmy5GCdNWF7545Eh
+
+#dn: cn=config
+#changetype: modify
+#delete: olcAuthzRegexp
+
+#dn: olcDatabase={-1}frontend,cn=config
+#changetype: modify
+#delete: olcAccess
+
+#dn: olcDatabase={0}config,cn=config
+#changetype: modify
+#add: olcRootDN
+#olcRootDN: cn=admin,cn=config
+
+dn: olcDatabase={0}config,cn=config
+changetype: modify
+add: olcRootPW
+olcRootPW: {SSHA}lx56Oal2lADo7y21hmy5GCdNWF7545Eh
+
+dn: olcDatabase={0}config,cn=config
+changetype: modify
+delete: olcAccess
+
+dn: cn=module,cn=config
+objectClass: olcModuleList
+cn: module
+olcModulePath: /usr/lib/ldap
+olcModuleLoad: syncprov.la
+
+# Syncing config
+dn: cn=config
+changetype: modify
+replace: olcServerID
+olcServerID: 1 ldap://mmocambos.nes.it
+olcServerID: 2 ldap://coco
+
+dn: olcOverlay=syncprov,olcDatabase={0}config,cn=config
+changetype: add
+objectClass: olcOverlayConfig
+objectClass: olcSyncProvConfig
+olcOverlay: syncprov
+
+dn: olcDatabase={0}config,cn=config
+changetype: modify
+add: olcDbIndex
+olcDbIndex: objectClass,entryUUID,entryCSN eq
+olcDbIndex: cn,uid pres,eq,sub
+
+dn: olcDatabase={0}config,cn=config
+objectClass: olcDatabaseConfig
+objectClass: olcHdbConfig
+olcDatabase: {0}config
+olcDbDirectory:	/var/lib/ldap
+changetype: modify
+add: olcSyncRepl
+olcSyncRepl: rid=001 provider=ldap://mmocambos.nes.it binddn="cn=config" bindmethod=simple
+ credentials=livre searchbase="cn=config" type=refreshAndPersist retry="5 5 300 5" timeout=3
+olcSyncRepl: rid=002 provider=ldap://coco binddn="cn=config" bindmethod=simple 
+ credentials=livre searchbase="cn=config" type=refreshAndPersist retry="5 5 300 5" timeout=3
+-
+add: olcMirrorMode
+olcMirrorMode: TRUE
+
+#Backend config
+
+dn: olcOverlay=syncprov,olcDatabase={1}hdb,cn=config
+changetype: add
+objectClass: olcOverlayConfig
+objectClass: olcSyncProvConfig
+olcOverlay: syncprov
+
+dn: cn=module,cn=config
+objectClass: olcModuleList
+cn: module
+olcModulePath: /usr/lib/ldap
+olcModuleLoad: back_hdb.la
+
+dn: olcDatabase={1}hdb,cn=config
+changetype: modify
+add: olcDbIndex
+olcDbIndex: objectClass,entryUUID,entryCSN eq
+olcDbIndex: cn,uid pres,eq,sub
+
+dn: olcDatabase={1}hdb,cn=config
+objectClass: olcDatabaseConfig
+objectClass: olcHdbConfig
+olcDatabase: {1}hdb
+olcSuffix: dc=mocambos,dc=net
+olcDbDirectory:	/var/lib/ldap
+olcRootDN: cd=admin,dc=mocambos,dc=net
+olcRootPW: {SSHA}lx56Oal2lADo7y21hmy5GCdNWF7545Eh
+add: olcSyncRepl
+olcSyncRepl: rid=004 provider=ldap://mmocambos.nes.it binddn="cn=admin,dc=mocambos,dc=net"
+ bindmethod=simple credentials=livre searchbase="dc=mocambos,dc=net" type=refreshOnly
+ interval=00:00:00:10 retry="5 5 300 5" timeout=3
+olcSyncRepl: rid=005 provider=ldap://coco binddn="cn=admin,dc=mocambos,dc=net"
+ bindmethod=simple credentials=livre searchbase="dc=mocambos,dc=net" type=refreshOnly
+ interval=00:00:00:10 retry="5 5 300 5" timeout=3
+olcMirrorMode: TRUE
+

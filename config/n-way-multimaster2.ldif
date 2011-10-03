@@ -1,0 +1,19 @@
+# General config
+dn: cn=config
+objectClass: olcGlobal
+cn: config
+olcServerID: 2
+
+# Syncing config
+dn: olcDatabase={0}config,cn=config
+changetype: modify
+add: olcSyncRepl
+olcSyncRepl: rid=001 provider=ldap://mmocambos.nes.it binddn="cn=config" bindmethod=simple
+ credentials=livre searchbase="cn=config" type=refreshAndPersist
+ retry="5 5 300 5" timeout=3
+olcSyncRepl: rid=002 provider=ldap://coco binddn="cn=config" bindmethod=simple
+ credentials=livre searchbase="cn=config" type=refreshAndPersist
+ retry="5 5 300 5" timeout=3
+-
+add: olcMirrorMode
+olcMirrorMode: TRUE

@@ -1,0 +1,30 @@
+dn: uid=avena, ou=people, dc=mocambos, dc=net
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+uid: avena
+sn: Blender
+givenName: Avena
+cn: Avena Blender
+displayName: TB
+uidNumber: 1008
+gidNumber: 10000
+userPassword: livre
+gecos: Avena Blender
+loginShell: /bin/bash
+homeDirectory: /home/avena
+shadowExpire: -1
+shadowFlag: 0
+shadowWarning: 7
+shadowMin: 8
+shadowMax: 999999
+shadowLastChange: 10877
+mail: avena@mocambos.net
+postalCode: 31000
+l: Campinas
+o: Mocambos
+mobile: +33 (0)6 xx xx xx xx
+homePhone: +33 (0)5 xx xx xx xx
+title: System Administrator
+postalAddress: 
+initials: AB

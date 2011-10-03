@@ -1,0 +1,55 @@
+# General config
+dn: cn=config
+objectClass: olcGlobal
+cn: config
+olcServerID: 1
+
+# Syncing config
+dn: cn=config
+changetype: modify
+replace: olcServerID
+olcServerID: 1 ldap://mmocambos.nes.it
+olcServerID: 2 ldap://coco
+
+dn: olcOverlay=syncprov,olcDatabase={0}config,cn=config
+changetype: add
+objectClass: olcOverlayConfig
+objectClass: olcSyncProvConfig
+olcOverlay: syncprov
+
+dn: olcDatabase={0}config,cn=config
+changetype: modify
+add: olcSyncRepl
+olcSyncRepl: rid=001 provider=ldap://mmocambos.nes.it binddn="cn=config" bindmethod=simple
+ credentials=livre searchbase="cn=config" type=refreshAndPersist
+ retry="5 5 300 5" timeout=3
+olcSyncRepl: rid=002 provider=ldap://coco binddn="cn=config" bindmethod=simple
+ credentials=livre searchbase="cn=config" type=refreshAndPersist
+ retry="5 5 300 5" timeout=3
+-
+add: olcMirrorMode
+olcMirrorMode: TRUE
+
+# Backend config
+
+dn: olcDatabase={1}hdb,cn=config
+objectClass: olcDatabaseConfig
+objectClass: olcHdbConfig
+olcDatabase: {1}hdb
+olcSuffix: cn=config
+olcDbDirectory:	/var/lib/ldap
+olcRootDN: cd=admin,dc=mocambos,dc=net
+olcRootPW: {SSHA}lx56Oal2lADo7y21hmy5GCdNWF7545Eh
+olcSyncRepl: rid=004 provider=ldap://mmocambos.net.it binddn="cn=admin,dc=mocambos,dc=net" bindmethod=simple
+ credentials=livre searchbase="dc=mocambos,dc=net" type=refreshOnly
+ interval=00:00:00:10 retry="5 5 300 5" timeout=3
+olcSyncRepl: rid=005 provider=ldap://coco binddn="cn=admin,dc=mocambos,dc=net" bindmethod=simple
+ credentials=livre searchbase="dc=mocambos,dc=net" type=refreshOnly
+ interval=00:00:00:10 retry="5 5 300 5" timeout=3
+olcMirrorMode: TRUE
+
+dn: olcOverlay=syncprov,olcDatabase={1}hdc,cn=config
+changetype: add
+objectClass: olcOverlayConfig
+objectClass: olcSyncProvConfig
+olcOverlay: syncprov

@@ -1,0 +1,9 @@
+dn: cn=config
+objectClass: olcGlobal
+cn: config
+olcServerID: 1
+
+dn: olcDatabase={0}config,cn=config
+objectClass: olcDatabaseConfig
+olcDatabase: {0}config
+olcRootPW: {SSHA}lx56Oal2lADo7y21hmy5GCdNWF7545Eh

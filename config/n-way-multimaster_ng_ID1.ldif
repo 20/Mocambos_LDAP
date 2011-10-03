@@ -1,0 +1,30 @@
+dn: cn=module{0},cn=config
+changetype: modify
+add: olcModuleLoad
+olcModuleLoad: syncprov
+
+dn: cn=config
+changetype: modify
+replace: olcServerID
+olcServerID: 1 ldap://mmocambos.nes.it
+olcServerID: 2 ldap://coco
+
+dn: olcOverlay=syncprov,olcDatabase={0}config,cn=config
+changetype: add
+objectClass: olcOverlayConfig
+objectClass: olcSyncProvConfig
+olcOverlay: syncprov
+
+dn: olcDatabase={0}config,cn=config
+changetype: modify
+add: olcSyncRepl
+olcSyncRepl: rid=001 provider=ldap://mmocambos.nes.it binddn="cn=config" bindmethod=simple
+  credentials="livre" searchbase="cn=config" type=refreshAndPersist
+  retry="5 5 300 5" timeout=1
+olcSyncRepl: rid=002 provider=ldap://coco binddn="cn=config" bindmethod=simple
+  credentials="livre" searchbase="cn=config" type=refreshAndPersist
+  retry="5 5 300 5" timeout=1
+-
+add: olcMirrorMode
+olcMirrorMode: TRUE
+
