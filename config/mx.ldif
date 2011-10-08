@@ -1,16 +1,16 @@
-dn: uid=avena, ou=people, dc=mocambos, dc=net
+dn: uid=mx, ou=people, dc=mocambos, dc=net
 objectClass: inetOrgPerson
 objectClass: posixAccount
 objectClass: shadowAccount
 uid: mx
-sn: Blender
-givenName: Mx
-cn: Mx Blender
+sn: Euzebio
+givenName: Cristian
+cn: Cristian Euzebio
 displayName: MX
-uidNumber: 1008
+uidNumber: 1009
 gidNumber: 10000
 userPassword: livre
-gecos: Mx Blender
+gecos: MX
 loginShell: /bin/bash
 homeDirectory: /home/mx
 shadowExpire: -1
@@ -19,7 +19,7 @@ shadowWarning: 7
 shadowMin: 8
 shadowMax: 999999
 shadowLastChange: 10877
-mail: mxxx@mocambos.net
+mail: mxx@mocambos.net
 postalCode: 31000
 l: Campinas
 o: Mocambos
@@ -27,4 +27,5 @@ mobile: +33 (0)6 xx xx xx xx
 homePhone: +33 (0)5 xx xx xx xx
 title: System Administrator
 postalAddress: 
-initials: AB
+initials: MX
+cn: staff

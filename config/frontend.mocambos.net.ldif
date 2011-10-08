@@ -23,6 +23,11 @@ dn: ou=groups,dc=mocambos,dc=net
 objectClass: organizationalUnit
 ou: groups
 
+dn: cn=coordenadores,ou=groups,dc=mocambos,dc=net
+objectClass: groupOfNames
+cn: coordenadores
+member: uid=zumbi,ou=people,dc=mocambos,dc=net
+
 dn: uid=zumbi,ou=people,dc=mocambos,dc=net
 objectClass: inetOrgPerson
 objectClass: posixAccount
