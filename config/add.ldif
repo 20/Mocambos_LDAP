@@ -1,0 +1,4 @@
+dn: cn=hackers,ou=groups,dc=mocambos,dc=net
+objectClass: groupOfNames
+cn: coordenadores
+member: uid=vince,ou=people,dc=mocambos,dc=net

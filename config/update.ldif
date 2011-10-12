@@ -1,0 +1,7 @@
+dn: cn=coordenadores,ou=groups,dc=mocambos,dc=net
+changetype: modify
+replace: member
+member: uid=zumbi,ou=people,dc=mocambos,dc=net
+member: uid=vince,ou=people,dc=mocambos,dc=net
+
+
