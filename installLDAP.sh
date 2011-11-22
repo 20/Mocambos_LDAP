@@ -38,16 +38,16 @@ done
 echoc $RED "Installing OpenLdap packages ..."
 sudo apt-get install slapd ldap-utils -y
 
-# Add default base schemas
-echoc $RED "Adding base schemas..."
-sudo ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/ldap/schema/cosine.ldif
-sudo ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/ldap/schema/nis.ldif
-sudo ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/ldap/schema/inetorgperson.ldif
+# # Add default base schemas
+# echoc $RED "Adding base schemas..."
+# sudo ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/ldap/schema/cosine.ldif
+# sudo ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/ldap/schema/nis.ldif
+# sudo ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/ldap/schema/inetorgperson.ldif
 
-mkdir /tmp/ldifo
-slaptest -f config/schema_convert.conf -F /tmp/ldifo/
-sudo ldapadd -Y EXTERNAL -H ldapi:/// -f /tmp/ldifo/cn\=config/cn\=schema/cn\=\{6\}dyngroup.ldif
-rm -rf /tmp/ldifo
+# mkdir /tmp/ldifo
+# slaptest -f config/schema_convert.conf -F /tmp/ldifo/
+# sudo ldapadd -Y EXTERNAL -H ldapi:/// -f /tmp/ldifo/cn\=config/cn\=schema/cn\=\{6\}dyngroup.ldif
+# rm -rf /tmp/ldifo
 
 # Add mocambos backend schema
 echoc $RED "Adding backend schema:"
